@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умный список задач | tracker_habit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Подключаем шрифт и иконки -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Трекер привычек и задач</h1>
+            <p class="subtitle">Управляй своим временем эффективно</p>
+        </header>
+
+        <!-- Блок статистики -->
+        <section class="stats-grid">
+            <div class="stat-card total">
+                <span class="stat-value">{{ stats.total }}</span>
+                <span class="stat-label">Всего задач</span>
+            </div>
+            <div class="stat-card completed">
+                <span class="stat-value">{{ stats.completed }}</span>
+                <span class="stat-label">Выполнено</span>
+            </div>
+            <div class="stat-card pending">
+                <span class="stat-value">{{ stats.not_completed }}</span>
+                <span class="stat-label">В процессе</span>
+            </div>
+        </section>
+
+        <!-- Форма добавления -->
+        <section class="add-task-section">
+            <form action="/add" method="POST" class="add-form">
+                <input type="text" name="title" placeholder="Что нужно сделать?" required autocomplete="off">
+                <button type="submit" class="btn-add">Добавить</button>
+            </form>
+        </section>
+
+        <!-- Список задач -->
+        <section class="task-list">
+            {% if tasks %}
+                {% for task in tasks %}
+                    <!-- task[0] = ID, task[1] = Название, task[2] = Статус -->
+                    <div class="task-card {% if task[2] == 'done' %}is-done{% endif %}">
+                        
+                        <div class="task-content">
+                            <!-- Кнопка переключения статуса -->
+                            <form action="/toggle/{{ task[0] }}" method="POST" class="toggle-form">
+                                <input type="hidden" name="status" value="{{ task[2] }}">
+                                <button type="submit" class="btn-check {% if task[2] == 'done' %}checked{% endif %}" title="Изменить статус">
+                                    {% if task[2] == 'done' %}✓{% endif %}
+                                </button>
+                            </form>
+                            
+                            <span class="task-title">{{ task[1] }}</span>
+                        </div>
+
+                        <div class="task-actions">
+                            <!-- Кнопка удаления с подтверждением -->
+                            <a href="/delete/{{ task[0] }}" class="btn-delete" onclick="return confirm('Вы уверены, что хотите удалить задачу?');" title="Удалить">
+                                ✕
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <p>У вас пока нет задач. Добавьте первую!</p>
+                </div>
+            {% endif %}
+        </section>
+    </div>
+</body>
+</html>

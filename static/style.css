@@ -1,0 +1,213 @@
+/* Базовые настройки */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6;
+    color: #1f2937;
+    line-height: 1.5;
+    padding: 2rem 1rem;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Шапка */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #6b7280;
+}
+
+/* Блок статистики */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stat-card.total .stat-value { color: #3b82f6; }
+.stat-card.completed .stat-value { color: #10b981; }
+.stat-card.pending .stat-value { color: #f59e0b; }
+
+/* Форма добавления */
+.add-task-section {
+    margin-bottom: 2rem;
+}
+
+.add-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.add-form input {
+    flex: 1;
+    padding: 1rem 1.25rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.add-form input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.btn-add {
+    padding: 1rem 1.5rem;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-add:hover {
+    background-color: #2563eb;
+}
+
+/* Список задач */
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.task-card {
+    background: white;
+    padding: 1rem 1.25rem;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid #f59e0b; /* Оранжевый для новых */
+    transition: all 0.3s ease;
+}
+
+.task-card.is-done {
+    border-left-color: #10b981; /* Зеленый для выполненных */
+    background-color: #f9fafb;
+}
+
+.task-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.task-title {
+    font-size: 1.05rem;
+    transition: color 0.3s;
+}
+
+.task-card.is-done .task-title {
+    color: #9ca3af;
+    text-decoration: line-through;
+}
+
+/* Кнопка-чекбокс */
+.btn-check {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    border: 2px solid #d1d5db;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.btn-check:hover {
+    border-color: #10b981;
+}
+
+.btn-check.checked {
+    background-color: #10b981;
+    border-color: #10b981;
+}
+
+/* Кнопка удаления */
+.task-actions {
+    display: flex;
+    align-items: center;
+}
+
+.btn-delete {
+    text-decoration: none;
+    color: #d1d5db;
+    font-size: 1.2rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.btn-delete:hover {
+    background-color: #fee2e2;
+    color: #ef4444;
+}
+
+/* Пустой список */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: white;
+    border-radius: 12px;
+    color: #6b7280;
+    border: 1px dashed #d1d5db;
+}
